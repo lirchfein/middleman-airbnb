@@ -1,3 +1,6 @@
+require 'pry-byebug'
+require 'yaml'
+
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
@@ -19,4 +22,8 @@ end
 activate :deploy do |deploy|
   deploy.build_before = true
   deploy.deploy_method = :git
+end
+
+data.flats.each do |username, place|
+  proxy "/flats/#{username}.html", "/flats/show.html", locals: { owner: username, flat: place }, ignore: true
 end
